@@ -12,14 +12,13 @@ public class SOFELogger {
     public SOFELogger(Class inputClass) {
 
 	this.logger = Logger.getLogger(inputClass);
-	String current;
-	try {
-	    current = new java.io.File( "." ).getCanonicalPath();
-	        System.out.println("Current dir:"+current);
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
+//	String current;
+//	try {
+//	    current = new java.io.File(".").getCanonicalPath();
+//	} catch (IOException e) {
+//	    // TODO Auto-generated catch block
+//	    e.printStackTrace();
+//	}
 	PropertyConfigurator.configure("./resources/main/log4j.properties");
 
     }
@@ -30,6 +29,17 @@ public class SOFELogger {
 
     public void error(String inputText) {
 	this.logger.error(inputText);
+    }
+
+    public void error(String inputText, Throwable e) {
+	// Convert stacktrace to string
+	StringBuilder sb = new StringBuilder();
+	for (StackTraceElement element : e.getStackTrace()) {
+	    sb.append(element.toString());
+	    sb.append("\n");
+	}
+
+	this.logger.error(inputText + "\n" + sb.toString());
     }
 
 }
