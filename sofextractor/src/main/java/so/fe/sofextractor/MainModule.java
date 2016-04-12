@@ -9,7 +9,7 @@ public class MainModule {
     public static void main(String[] args) {
 
 	// Init connection with DB
-	DBConnector dbConnection = new DBConnector();
+	DBConnector dbConnection = new DBConnector(false);
 	
 	// TODO Get Data from DB
 	
